@@ -1,0 +1,32 @@
+{
+  "name": "hyphen-grpc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "crates/grpc/proto/ts/index.ts",
+  "types": "crates/grpc/proto/ts/index.ts",
+  "exports": {
+    ".": {
+      "import": "./crates/grpc/proto/ts/index.ts",
+      "require": "./crates/grpc/proto/ts/index.ts",
+      "types": "./crates/grpc/proto/ts/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "protoc --ts_out crates/grpc/proto/ts/ --proto_path crates/grpc/proto/ crates/grpc/proto/*.proto"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/edisontim/hyphen"
+  },
+  "author": "tedison",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.7.3",
+    "@protobuf-ts/plugin": "^2.8.2",
+    "google-protobuf": "^3.21.2",
+    "grpc-web": "^1.4.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.0"
+  }
+}

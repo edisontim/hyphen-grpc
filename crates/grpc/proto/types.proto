@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package types;
+
+import "google/protobuf/timestamp.proto";
+
+message AgentGeneralConfig {
+    string name = 1;
+    string creator = 2;
+    optional string elevenlabs_api_key = 5;
+    repeated string tools = 6;
+    optional string voice_id = 7;
+}
+
+message AgentPersonality {
+    string bio = 1;
+    string lore = 2;
+    string knowledge = 3;
+    string adjectives = 4;
+    string people = 5;
+    string topics = 6;
+    string character_style = 7;
+}
+
+message AgentClient {
+    string username = 1;
+    string client_type = 2;
+    string main_login_info = 3;
+    optional string secondary_login_info = 4;
+    optional string tertiary_login_info = 5;
+    optional string options = 6;
+}
+
+message AgentChannel {
+    string channel_name = 1;
+    string channel_type = 2;
+    string main_identifier = 3;
+    optional string secondary_identifier = 4;
+    bool gated = 5;
+}
+
+
+message ContemplationMessage {
+    int32 agent_id = 1;
+    string contemplation = 2;
+    google.protobuf.Timestamp created_at = 3;
+    string channel_name = 4;
+    Type type = 5;
+    string username = 6;
+    optional string in_response_to = 7;
+}
+
+enum Type {
+    START = 0;
+    USER_MESSAGE = 1;
+    CONTEMPLATION = 2;
+    AGENT_MESSAGE = 3;
+}

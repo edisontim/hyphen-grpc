@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package modify_agent;
+
+import "types.proto";
+
+message ModifyAgentRequest {
+	ModifyAgentGeneralConfig general_config = 1;
+	types.AgentPersonality personality = 2;
+	string signature = 3;
+}
+
+message ModifyAgentResponse {
+	int32 agent_id = 1;
+}
+
+message ModifyAgentGeneralConfig {
+	int32 id = 1;
+	repeated string tools = 2;
+    optional string elevenlabs_api_key = 3;
+	optional string voice_id = 4;
+}

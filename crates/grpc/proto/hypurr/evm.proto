@@ -1,0 +1,108 @@
+syntax = "proto3";
+
+package hypurr;
+option go_package = "gitlab.com/hypurr/hypurr-grpc/go/hypurr";
+
+import "hypurr/common.proto";
+
+// ERC20 Token messages
+message ERC20Token {
+  string address = 1;
+  string name = 2;
+  string symbol = 3;
+  int32 decimals = 4;
+  string total_supply = 5; // Using string for big integers
+  double price_in_whype = 6; // New field for price in WHYPE
+  double volume_in_whype = 7; // Added field for volume in WHYPE
+  int64 last_volume_update = 8;
+}
+
+// Account Balance messages
+message ERC20AccountBalance {
+  string address = 1;
+  string contract = 2;
+  string balance = 3;  // Using string for big integers
+  bool is_owner = 4;
+}
+
+// UniswapV2 Pair messages
+message UniV2Pair {
+  string address = 1;
+  ERC20Token token0 = 2;  // Embedded token object
+  ERC20Token token1 = 3;  // Embedded token object
+  string reserve0 = 4;    // Using string for big integers
+  string reserve1 = 5;    // Using string for big integers
+  string total_supply = 6;  // Using string for big integers
+  string factory = 7;
+  double volume0_24h = 8;  // 24h volume EMA for token0
+  double volume1_24h = 9;  // 24h volume EMA for token1
+  int64 last_volume_update = 10;  // Last time volume was updated
+}
+
+// Swap messages
+message UniV2Swap {
+  string id = 1;
+  string pair = 2;
+  string sender = 3;
+  string amount0 = 4;   // Net amount of token0 (positive for in, negative for out)
+  string amount1 = 5;   // Net amount of token1 (positive for in, negative for out)
+  string to = 6;
+  int64 timestamp = 7;
+}
+
+// ERC20 Transfer Event messages
+message ERC20TransferEvent {
+  string id = 1;
+  string contract = 2;
+  string amount = 3;      // Using string for big integers
+  int64 timestamp = 4;
+  string from = 5;
+  string to = 6;
+}
+
+// ERC20 Approval Event messages
+message ERC20ApprovalEvent {
+  string id = 1;
+  string contract = 2;
+  string amount = 3;      // Using string for big integers
+  int64 timestamp = 4;
+  string owner = 5;
+  string spender = 6;
+}
+
+// ERC20 Allowance messages
+message ERC20Allowance {
+  string owner = 1;
+  string spender = 2;
+  string amount = 3;      // Using string for big integers
+}
+
+// UniswapV3 Pool messages
+message UniV3Pool {
+  string address = 1;
+  string factory = 2;
+  ERC20Token token0 = 3;  // Embedded token object
+  ERC20Token token1 = 4;  // Embedded token object
+  int32 fee = 5;
+  int32 tick_spacing = 6;
+  string liquidity = 7;    // Using string for big integers
+  string sqrt_price_x96 = 8;  // Using string for big integers
+  int32 tick = 9;
+  double volume0_24h = 10;  // 24h volume EMA for token0
+  double volume1_24h = 11;  // 24h volume EMA for token1
+  int64 last_volume_update = 12;  // Last time volume was updated
+}
+
+// UniswapV3 Swap messages
+message UniV3Swap {
+  string id = 1;
+  string pool = 2;
+  string sender = 3;
+  string recipient = 4;
+  string amount0 = 5;    // Using string for big integers
+  string amount1 = 6;    // Using string for big integers
+  string sqrt_price_x96 = 7;  // Using string for big integers
+  string liquidity = 8;    // Using string for big integers
+  int32 tick = 9;
+  int64 timestamp = 10;
+}

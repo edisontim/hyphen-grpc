@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package hyphen;
+
+import "modify_agent.proto";
+import "types.proto";
+import "create_agent.proto";
+import "user_agents.proto";
+import "list_agents.proto";
+
+service Hyphen {
+	rpc CreateAgent(create_agent.CreateAgentRequest) returns (create_agent.CreateAgentResponse);
+	rpc AddTokenAddress(AddTokenAddressRequest) returns (AddTokenAddressResponse);
+	rpc ModifyAgent(modify_agent.ModifyAgentRequest) returns (modify_agent.ModifyAgentResponse);
+	rpc GetUserAgents(user_agents.GetUserAgentsRequest) returns (user_agents.GetUserAgentsResponse);
+    rpc SubscribeContemplation(SubscribeContemplationRequest) returns (stream SubscribeContemplationResponse);
+    rpc UnsubscribeContemplation(UnsubscribeContemplationRequest) returns (UnsubscribeContemplationResponse);
+    rpc GetChannels(GetChannelsRequest) returns (GetChannelsResponse);
+    rpc GetRecentContemplations(GetRecentContemplationsRequest) returns (GetRecentContemplationsResponse);
+	rpc ListAgents(list_agents.ListAgentsRequest) returns (list_agents.ListAgentsResponse);
+	// rpc ExecuteFunction(mcp.ExecuteFunctionRequest) returns (mcp.ExecuteFunctionResponse);
+	// rpc GetOpenAIEphemeralToken(mcp.GetOpenAiEphemeralTokenRequest) returns (mcp.GetOpenAiEphemeralTokenResponse);
+	// rpc GetServerAccesses(mcp.GetServerAccessesRequest) returns (mcp.GetServerAccessesResponse);
+	// rpc AddServerAccess(mcp.AddServerAccessRequest) returns (mcp.AddServerAccessResponse);
+}
+
+message AddTokenAddressRequest {
+    string token_address = 1;
+	int32 agent_id = 2;
+}
+
+message AddTokenAddressResponse {
+    bool success = 1;
+}
+
+message UnsubscribeContemplationRequest {
+    int32 agent_id = 1;
+    string subscription_id = 2;
+}
+
+message UnsubscribeContemplationResponse {
+    bool success = 1;
+}
+
+message GetChannelsRequest { int32 agent_id = 1; }
+
+message GetChannelsResponse {
+	repeated string channels = 1;
+}
+
+message GetRecentContemplationsRequest {
+    int32 agent_id = 1;
+    string channel_id = 2;
+	string channel_name = 3;
+    string agent_name = 4;
+    int32 limit = 5;
+}
+
+message GetRecentContemplationsResponse {
+    repeated types.ContemplationMessage messages = 1;
+}
+
+message SubscribeContemplationRequest {
+	int32 agent_id = 1;
+}
+
+message SubscribeContemplationResponse {
+    types.ContemplationMessage contemplation = 1;
+    optional string subscription_id = 2;
+}
+

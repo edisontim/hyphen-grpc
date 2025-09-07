@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package hypurr;
+option go_package = "gitlab.com/hypurr/hypurr-grpc/go/hypurr";
+
+import "hypurr/common.proto";
+import "google/protobuf/wrappers.proto";
+
+// HPump Launch Token messages
+message HpumpV1Launch {
+  string address = 1;          // token address is unique
+  string symbol = 2;
+  string name = 3;
+  string dev_address = 4;
+  string description = 5;
+  string media_type = 6;      // MEDIA_TYPE_PHOTO, MEDIA_TYPE_ANIMATION, MEDIA_TYPE_VIDEO
+  string media_uri = 7;
+  int64 dev_telegram_id = 8;
+  int64 created_at = 9;        // block timestamp
+  int64 launch_id = 10;        // the uint256 id from the event (using string for big integers)
+  string base_reserve = 11;      // Using string for big integers
+  string quote_reserve = 12;     // Using string for big integers
+  string x0 = 13;
+  string y0 = 14;
+  int64 last_sync_timestamp = 15;
+  bool graduated = 16;
+  int64 graduated_at = 17;      // Timestamp when graduated
+  string graduated_to = 18;     // Address of the new token after graduation
+  // Dev telegram user
+  TelegramUserPublic dev_telegram_user = 19;
+  double volume_24h = 20;         // Daily quote volume
+  double previous_day_price = 21;
+  google.protobuf.Int64Value topic_id = 22; // Telegram topic id for launch chat
+}
+
+// HPump Launch Pair Swap messages
+message HpumpV1LaunchSwap {
+  string id = 1;               // tx hash + log index
+  string launch = 2;             // launch pair address
+  string sender = 3;
+  string origin = 4;
+  string to = 5;
+  string net_base_amount = 6;
+  string net_quote_amount = 7;        // Using string for big integers
+  int32 block_number = 8;
+  int64 timestamp = 9;
+}
+
+message HpumpV1LaunchMessage {
+  int64 id = 1;
+  int64 timestamp = 2;
+  int64 launch_id = 3;
+  string launch_address = 4;
+  int64 telegram_id = 5;
+  TelegramUserPublic author = 6;
+  int64 chat_id = 7;
+  int64 topic_id = 8;
+  string message = 9;
+  bool pinned = 10;
+}

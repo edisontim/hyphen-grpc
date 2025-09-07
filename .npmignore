@@ -1,0 +1,16 @@
+# Exclude proto source files, only keep TypeScript
+*.proto
+
+# Exclude Rust/Cargo files
+*.rs
+Cargo.toml
+build.rs
+
+# Keep only the TypeScript files
+!crates/grpc/proto/ts/**
+!crates/grpc/proto/proto_types/**
+
+# Exclude other directories
+src/
+target/
+.github/

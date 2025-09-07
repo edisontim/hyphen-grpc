@@ -1,0 +1,32 @@
+syntax = "proto3";
+package hypurr;
+option go_package = "gitlab.com/hypurr/hypurr-grpc/go/hypurr";
+
+message TelegramUserPublic {
+  int64 id = 1;
+  string username = 2;
+  string picture_file_id = 3;
+  int64 reputation_score = 4;
+}
+
+message PriceCandle {
+  int64 time = 1;
+  float open = 2;
+  float high = 3;
+  float low = 4;
+  float close = 5;
+  float volume_base = 6;
+  float volume_quote = 7;
+}
+
+message WalletPosition {
+  string address = 1;
+  float balance = 2;
+  float cost = 3;
+}
+
+enum MediaType {
+  MEDIA_TYPE_PHOTO = 0;
+  MEDIA_TYPE_ANIMATION = 1;
+  MEDIA_TYPE_VIDEO = 2;
+}

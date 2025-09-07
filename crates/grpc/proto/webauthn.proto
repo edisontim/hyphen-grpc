@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package webauthn;
+
+// Request to start WebAuthn registration process
+message WebAuthnRegistrationStartRequest {
+  string username = 1;
+  string display_name = 2;
+  // Optional existing auth information
+  optional string signature = 3;
+  optional uint64 nonce = 4;
+}
+
+// Response containing challenge for registration
+message WebAuthnRegistrationStartResponse {
+  string challenge = 1;
+  string session_id = 2;
+  bytes public_key_credential_creation_options = 3;
+}
+
+// Request to finish WebAuthn registration with the signed credential
+message WebAuthnRegistrationFinishRequest {
+  string session_id = 1;
+  bytes credential = 2;
+}
+
+// Response after registration completion
+message WebAuthnRegistrationFinishResponse {
+  bool success = 1;
+  string user_id = 2;
+}
+
+// Request to start WebAuthn authentication process
+message WebAuthnAuthenticationStartRequest {
+  string username = 1;
+}
+
+// Response containing challenge for authentication
+message WebAuthnAuthenticationStartResponse {
+  string challenge = 1;
+  string session_id = 2;
+  bytes public_key_credential_request_options = 3;
+}
+
+// Request to finish WebAuthn authentication with the signed credential
+message WebAuthnAuthenticationFinishRequest {
+  string session_id = 1;
+  bytes credential = 2;
+}
+
+// Response after authentication completion
+message WebAuthnAuthenticationFinishResponse {
+  bool success = 1;
+  string user_id = 2;
+  uint64 auth_nonce = 3;
+  string auth_signature = 4;
+}
+
+// Service definition for WebAuthn operations
+service WebAuthnService {
+  // Registration flow
+  rpc StartRegistration(WebAuthnRegistrationStartRequest) returns (WebAuthnRegistrationStartResponse);
+  rpc FinishRegistration(WebAuthnRegistrationFinishRequest) returns (WebAuthnRegistrationFinishResponse);
+  
+  // Authentication flow
+  rpc StartAuthentication(WebAuthnAuthenticationStartRequest) returns (WebAuthnAuthenticationStartResponse);
+  rpc FinishAuthentication(WebAuthnAuthenticationFinishRequest) returns (WebAuthnAuthenticationFinishResponse);
+} 

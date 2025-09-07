@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package create_agent;
+
+import "types.proto";
+
+message CreateAgentRequest {
+    types.AgentGeneralConfig general_config = 1;
+    types.AgentPersonality personality = 2;
+    repeated types.AgentClient clients = 3;
+    repeated types.AgentChannel channels = 4;
+	TransferSpotHpyh transfer_spot_hyph = 5;
+	string token_ticker = 6;
+}
+
+message CreateAgentResponse {
+    int32 agent_id = 1;
+}
+
+message TransferSpotHpyh {
+	float amount = 1;
+	uint64 time = 2;
+	string signature = 3;
+	string wallet_address = 4;
+}

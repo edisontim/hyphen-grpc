@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package auth;
+
+service Auth {
+    rpc GetSIWEMessage (SIWEChallengeRequest) returns (SIWEChallengeResponse);
+    rpc VerifySIWE (SIWEVerifyRequest) returns (SIWEVerifyResponse);
+}
+
+message SIWEChallengeRequest {
+    string eth_address = 1;
+    optional uint64 chain_id = 2;
+}
+
+message SIWEChallengeResponse {
+    string siwe_message = 1;
+}
+
+message SIWEVerifyRequest {
+    string eth_address = 1;
+    string siwe_message = 2;
+    string signature = 3;
+}
+
+message SIWEVerifyResponse {
+    string token = 1;
+}
+

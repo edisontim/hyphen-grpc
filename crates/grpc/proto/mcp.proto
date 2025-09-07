@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package mcp;
+
+message WebAuthnAuth {
+    string auth_nonce = 1;
+    string auth_signature = 2;
+}
+
+message McpServer {
+	string name = 1;
+	string url = 2;
+	string icon_url = 3;
+	bool has_access = 4;
+}
+
+message AddServerAccessRequest {
+	string server_name = 1;
+	repeated Logins logins = 2;
+	WebAuthnAuth webauthn_auth = 3;
+}
+
+message AddServerAccessResponse {
+	repeated string required_params = 1;
+}
+	
+message Logins {
+	string name = 1;
+	string value = 2;
+	string expires_at = 3;
+}
+
+
+message GetOpenAiEphemeralTokenRequest {
+	optional WebAuthnAuth webauthn_auth = 1; // WebAuthn authentication
+}
+
+message GetOpenAiEphemeralTokenResponse {
+	string token = 1;
+}
+
+message GetServerAccessesRequest {
+	optional WebAuthnAuth webauthn_auth = 1; // WebAuthn authentication
+}
+
+message GetServerAccessesResponse {
+	repeated McpServer servers = 1;
+}
+
+message ExecuteFunctionRequest {
+    string function_name = 1;
+    string function_arguments = 2;
+	optional WebAuthnAuth webauthn_auth = 3;
+}
+
+message ExecuteFunctionResponse {
+    string result = 1;
+}
