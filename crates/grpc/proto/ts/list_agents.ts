@@ -10,6 +10,9 @@ import { UnknownFieldHandler } from "@protobuf-ts/runtime";
 import type { PartialMessage } from "@protobuf-ts/runtime";
 import { reflectionMergePartial } from "@protobuf-ts/runtime";
 import { MessageType } from "@protobuf-ts/runtime";
+import { Timestamp } from "./google/protobuf/timestamp";
+import { AgentChannel } from "./types";
+import { AgentPersonality } from "./types";
 /**
  * @generated from protobuf message list_agents.ListAgentsRequest
  */
@@ -28,80 +31,96 @@ export interface ListAgentsRequest {
  */
 export interface ListAgentsResponse {
     /**
-     * @generated from protobuf field: repeated list_agents.ListAgent agents = 1
+     * @generated from protobuf field: repeated list_agents.ListedAgent agents = 1
      */
-    agents: ListAgent[];
+    agents: ListedAgent[];
 }
 /**
- * @generated from protobuf message list_agents.ListAgent
+ * @generated from protobuf message list_agents.ListedAgent
  */
-export interface ListAgent {
+export interface ListedAgent {
     /**
-     * @generated from protobuf field: string agent_id = 1
+     * @generated from protobuf field: list_agents.ListedAgentGeneralConfig general_config = 1
      */
-    agentId: string;
+    generalConfig?: ListedAgentGeneralConfig;
     /**
-     * @generated from protobuf field: string agent_name = 2
+     * @generated from protobuf field: optional types.AgentPersonality personality = 2
      */
-    agentName: string;
+    personality?: AgentPersonality;
     /**
-     * @generated from protobuf field: string bio = 3
+     * @generated from protobuf field: repeated types.AgentChannel channels = 10
      */
-    bio: string;
+    channels: AgentChannel[];
+}
+/**
+ * @generated from protobuf message list_agents.ListedAgentGeneralConfig
+ */
+export interface ListedAgentGeneralConfig {
     /**
-     * @generated from protobuf field: string creator = 4
+     * @generated from protobuf field: string id = 1
+     */
+    id: string;
+    /**
+     * @generated from protobuf field: string name = 2
+     */
+    name: string;
+    /**
+     * @generated from protobuf field: string creator = 3
      */
     creator: string;
+    /**
+     * @generated from protobuf field: repeated string tools = 4
+     */
+    tools: string[];
     /**
      * @generated from protobuf field: optional string wallet_address = 5
      */
     walletAddress?: string;
     /**
-     * @generated from protobuf field: list_agents.ListAgentsHypurrLaunch hypurr_launches = 6
-     */
-    hypurrLaunches?: ListAgentsHypurrLaunch;
-    /**
-     * @generated from protobuf field: repeated list_agents.ListAgentsChannel channels = 7
-     */
-    channels: ListAgentsChannel[];
-}
-/**
- * @generated from protobuf message list_agents.ListAgentsChannel
- */
-export interface ListAgentsChannel {
-    /**
-     * @generated from protobuf field: string channel_type = 1
-     */
-    channelType: string;
-    /**
-     * @generated from protobuf field: string channel_name = 2
-     */
-    channelName: string;
-    /**
-     * @generated from protobuf field: string main_identifier = 3
-     */
-    mainIdentifier: string;
-    /**
-     * @generated from protobuf field: optional string secondary_identifier = 4
-     */
-    secondaryIdentifier?: string;
-}
-/**
- * @generated from protobuf message list_agents.ListAgentsHypurrLaunch
- */
-export interface ListAgentsHypurrLaunch {
-    /**
-     * @generated from protobuf field: string token_ticker = 1
-     */
-    tokenTicker: string;
-    /**
-     * @generated from protobuf field: string token_address = 2
+     * @generated from protobuf field: string token_address = 6
      */
     tokenAddress: string;
     /**
-     * @generated from protobuf field: string listed_timestamp = 3
+     * @generated from protobuf field: string token_ticker = 7
      */
-    listedTimestamp: string;
+    tokenTicker: string;
+    /**
+     * @generated from protobuf field: bool enabled = 8
+     */
+    enabled: boolean;
+    /**
+     * @generated from protobuf field: list_agents.CreationStatus creation_status = 9
+     */
+    creationStatus: CreationStatus;
+    /**
+     * @generated from protobuf field: google.protobuf.Timestamp created_at = 10
+     */
+    createdAt?: Timestamp;
+    /**
+     * @generated from protobuf field: google.protobuf.Timestamp updated_at = 11
+     */
+    updatedAt?: Timestamp;
+}
+/**
+ * @generated from protobuf enum list_agents.CreationStatus
+ */
+export enum CreationStatus {
+    /**
+     * @generated from protobuf enum value: WAITING_FOR_TOKEN_ADDRESS = 0;
+     */
+    WAITING_FOR_TOKEN_ADDRESS = 0,
+    /**
+     * @generated from protobuf enum value: WAITING_FOR_HYPURR_LAUNCH = 1;
+     */
+    WAITING_FOR_HYPURR_LAUNCH = 1,
+    /**
+     * @generated from protobuf enum value: WAITING_FOR_HPYH_PAYMENT = 2;
+     */
+    WAITING_FOR_HPYH_PAYMENT = 2,
+    /**
+     * @generated from protobuf enum value: CREATED = 3;
+     */
+    CREATED = 3
 }
 // @generated message type with reflection information, may provide speed optimized methods
 class ListAgentsRequest$Type extends MessageType<ListAgentsRequest> {
@@ -162,7 +181,7 @@ export const ListAgentsRequest = new ListAgentsRequest$Type();
 class ListAgentsResponse$Type extends MessageType<ListAgentsResponse> {
     constructor() {
         super("list_agents.ListAgentsResponse", [
-            { no: 1, name: "agents", kind: "message", repeat: 2 /*RepeatType.UNPACKED*/, T: () => ListAgent }
+            { no: 1, name: "agents", kind: "message", repeat: 2 /*RepeatType.UNPACKED*/, T: () => ListedAgent }
         ]);
     }
     create(value?: PartialMessage<ListAgentsResponse>): ListAgentsResponse {
@@ -177,8 +196,8 @@ class ListAgentsResponse$Type extends MessageType<ListAgentsResponse> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* repeated list_agents.ListAgent agents */ 1:
-                    message.agents.push(ListAgent.internalBinaryRead(reader, reader.uint32(), options));
+                case /* repeated list_agents.ListedAgent agents */ 1:
+                    message.agents.push(ListedAgent.internalBinaryRead(reader, reader.uint32(), options));
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -192,9 +211,9 @@ class ListAgentsResponse$Type extends MessageType<ListAgentsResponse> {
         return message;
     }
     internalBinaryWrite(message: ListAgentsResponse, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* repeated list_agents.ListAgent agents = 1; */
+        /* repeated list_agents.ListedAgent agents = 1; */
         for (let i = 0; i < message.agents.length; i++)
-            ListAgent.internalBinaryWrite(message.agents[i], writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+            ListedAgent.internalBinaryWrite(message.agents[i], writer.tag(1, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -206,54 +225,134 @@ class ListAgentsResponse$Type extends MessageType<ListAgentsResponse> {
  */
 export const ListAgentsResponse = new ListAgentsResponse$Type();
 // @generated message type with reflection information, may provide speed optimized methods
-class ListAgent$Type extends MessageType<ListAgent> {
+class ListedAgent$Type extends MessageType<ListedAgent> {
     constructor() {
-        super("list_agents.ListAgent", [
-            { no: 1, name: "agent_id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "agent_name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "bio", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 4, name: "creator", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 5, name: "wallet_address", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 6, name: "hypurr_launches", kind: "message", T: () => ListAgentsHypurrLaunch },
-            { no: 7, name: "channels", kind: "message", repeat: 2 /*RepeatType.UNPACKED*/, T: () => ListAgentsChannel }
+        super("list_agents.ListedAgent", [
+            { no: 1, name: "general_config", kind: "message", T: () => ListedAgentGeneralConfig },
+            { no: 2, name: "personality", kind: "message", T: () => AgentPersonality },
+            { no: 10, name: "channels", kind: "message", repeat: 2 /*RepeatType.UNPACKED*/, T: () => AgentChannel }
         ]);
     }
-    create(value?: PartialMessage<ListAgent>): ListAgent {
+    create(value?: PartialMessage<ListedAgent>): ListedAgent {
         const message = globalThis.Object.create((this.messagePrototype!));
-        message.agentId = "";
-        message.agentName = "";
-        message.bio = "";
-        message.creator = "";
         message.channels = [];
         if (value !== undefined)
-            reflectionMergePartial<ListAgent>(this, message, value);
+            reflectionMergePartial<ListedAgent>(this, message, value);
         return message;
     }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: ListAgent): ListAgent {
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: ListedAgent): ListedAgent {
         let message = target ?? this.create(), end = reader.pos + length;
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* string agent_id */ 1:
-                    message.agentId = reader.string();
+                case /* list_agents.ListedAgentGeneralConfig general_config */ 1:
+                    message.generalConfig = ListedAgentGeneralConfig.internalBinaryRead(reader, reader.uint32(), options, message.generalConfig);
                     break;
-                case /* string agent_name */ 2:
-                    message.agentName = reader.string();
+                case /* optional types.AgentPersonality personality */ 2:
+                    message.personality = AgentPersonality.internalBinaryRead(reader, reader.uint32(), options, message.personality);
                     break;
-                case /* string bio */ 3:
-                    message.bio = reader.string();
+                case /* repeated types.AgentChannel channels */ 10:
+                    message.channels.push(AgentChannel.internalBinaryRead(reader, reader.uint32(), options));
                     break;
-                case /* string creator */ 4:
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: ListedAgent, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* list_agents.ListedAgentGeneralConfig general_config = 1; */
+        if (message.generalConfig)
+            ListedAgentGeneralConfig.internalBinaryWrite(message.generalConfig, writer.tag(1, WireType.LengthDelimited).fork(), options).join();
+        /* optional types.AgentPersonality personality = 2; */
+        if (message.personality)
+            AgentPersonality.internalBinaryWrite(message.personality, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        /* repeated types.AgentChannel channels = 10; */
+        for (let i = 0; i < message.channels.length; i++)
+            AgentChannel.internalBinaryWrite(message.channels[i], writer.tag(10, WireType.LengthDelimited).fork(), options).join();
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message list_agents.ListedAgent
+ */
+export const ListedAgent = new ListedAgent$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class ListedAgentGeneralConfig$Type extends MessageType<ListedAgentGeneralConfig> {
+    constructor() {
+        super("list_agents.ListedAgentGeneralConfig", [
+            { no: 1, name: "id", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 2, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 3, name: "creator", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "tools", kind: "scalar", repeat: 2 /*RepeatType.UNPACKED*/, T: 9 /*ScalarType.STRING*/ },
+            { no: 5, name: "wallet_address", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 6, name: "token_address", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 7, name: "token_ticker", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 8, name: "enabled", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
+            { no: 9, name: "creation_status", kind: "enum", T: () => ["list_agents.CreationStatus", CreationStatus] },
+            { no: 10, name: "created_at", kind: "message", T: () => Timestamp },
+            { no: 11, name: "updated_at", kind: "message", T: () => Timestamp }
+        ]);
+    }
+    create(value?: PartialMessage<ListedAgentGeneralConfig>): ListedAgentGeneralConfig {
+        const message = globalThis.Object.create((this.messagePrototype!));
+        message.id = "";
+        message.name = "";
+        message.creator = "";
+        message.tools = [];
+        message.tokenAddress = "";
+        message.tokenTicker = "";
+        message.enabled = false;
+        message.creationStatus = 0;
+        if (value !== undefined)
+            reflectionMergePartial<ListedAgentGeneralConfig>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: ListedAgentGeneralConfig): ListedAgentGeneralConfig {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* string id */ 1:
+                    message.id = reader.string();
+                    break;
+                case /* string name */ 2:
+                    message.name = reader.string();
+                    break;
+                case /* string creator */ 3:
                     message.creator = reader.string();
+                    break;
+                case /* repeated string tools */ 4:
+                    message.tools.push(reader.string());
                     break;
                 case /* optional string wallet_address */ 5:
                     message.walletAddress = reader.string();
                     break;
-                case /* list_agents.ListAgentsHypurrLaunch hypurr_launches */ 6:
-                    message.hypurrLaunches = ListAgentsHypurrLaunch.internalBinaryRead(reader, reader.uint32(), options, message.hypurrLaunches);
+                case /* string token_address */ 6:
+                    message.tokenAddress = reader.string();
                     break;
-                case /* repeated list_agents.ListAgentsChannel channels */ 7:
-                    message.channels.push(ListAgentsChannel.internalBinaryRead(reader, reader.uint32(), options));
+                case /* string token_ticker */ 7:
+                    message.tokenTicker = reader.string();
+                    break;
+                case /* bool enabled */ 8:
+                    message.enabled = reader.bool();
+                    break;
+                case /* list_agents.CreationStatus creation_status */ 9:
+                    message.creationStatus = reader.int32();
+                    break;
+                case /* google.protobuf.Timestamp created_at */ 10:
+                    message.createdAt = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.createdAt);
+                    break;
+                case /* google.protobuf.Timestamp updated_at */ 11:
+                    message.updatedAt = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.updatedAt);
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -266,161 +365,40 @@ class ListAgent$Type extends MessageType<ListAgent> {
         }
         return message;
     }
-    internalBinaryWrite(message: ListAgent, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* string agent_id = 1; */
-        if (message.agentId !== "")
-            writer.tag(1, WireType.LengthDelimited).string(message.agentId);
-        /* string agent_name = 2; */
-        if (message.agentName !== "")
-            writer.tag(2, WireType.LengthDelimited).string(message.agentName);
-        /* string bio = 3; */
-        if (message.bio !== "")
-            writer.tag(3, WireType.LengthDelimited).string(message.bio);
-        /* string creator = 4; */
+    internalBinaryWrite(message: ListedAgentGeneralConfig, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* string id = 1; */
+        if (message.id !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.id);
+        /* string name = 2; */
+        if (message.name !== "")
+            writer.tag(2, WireType.LengthDelimited).string(message.name);
+        /* string creator = 3; */
         if (message.creator !== "")
-            writer.tag(4, WireType.LengthDelimited).string(message.creator);
+            writer.tag(3, WireType.LengthDelimited).string(message.creator);
+        /* repeated string tools = 4; */
+        for (let i = 0; i < message.tools.length; i++)
+            writer.tag(4, WireType.LengthDelimited).string(message.tools[i]);
         /* optional string wallet_address = 5; */
         if (message.walletAddress !== undefined)
             writer.tag(5, WireType.LengthDelimited).string(message.walletAddress);
-        /* list_agents.ListAgentsHypurrLaunch hypurr_launches = 6; */
-        if (message.hypurrLaunches)
-            ListAgentsHypurrLaunch.internalBinaryWrite(message.hypurrLaunches, writer.tag(6, WireType.LengthDelimited).fork(), options).join();
-        /* repeated list_agents.ListAgentsChannel channels = 7; */
-        for (let i = 0; i < message.channels.length; i++)
-            ListAgentsChannel.internalBinaryWrite(message.channels[i], writer.tag(7, WireType.LengthDelimited).fork(), options).join();
-        let u = options.writeUnknownFields;
-        if (u !== false)
-            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-        return writer;
-    }
-}
-/**
- * @generated MessageType for protobuf message list_agents.ListAgent
- */
-export const ListAgent = new ListAgent$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class ListAgentsChannel$Type extends MessageType<ListAgentsChannel> {
-    constructor() {
-        super("list_agents.ListAgentsChannel", [
-            { no: 1, name: "channel_type", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "channel_name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "main_identifier", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 4, name: "secondary_identifier", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
-        ]);
-    }
-    create(value?: PartialMessage<ListAgentsChannel>): ListAgentsChannel {
-        const message = globalThis.Object.create((this.messagePrototype!));
-        message.channelType = "";
-        message.channelName = "";
-        message.mainIdentifier = "";
-        if (value !== undefined)
-            reflectionMergePartial<ListAgentsChannel>(this, message, value);
-        return message;
-    }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: ListAgentsChannel): ListAgentsChannel {
-        let message = target ?? this.create(), end = reader.pos + length;
-        while (reader.pos < end) {
-            let [fieldNo, wireType] = reader.tag();
-            switch (fieldNo) {
-                case /* string channel_type */ 1:
-                    message.channelType = reader.string();
-                    break;
-                case /* string channel_name */ 2:
-                    message.channelName = reader.string();
-                    break;
-                case /* string main_identifier */ 3:
-                    message.mainIdentifier = reader.string();
-                    break;
-                case /* optional string secondary_identifier */ 4:
-                    message.secondaryIdentifier = reader.string();
-                    break;
-                default:
-                    let u = options.readUnknownField;
-                    if (u === "throw")
-                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-                    let d = reader.skip(wireType);
-                    if (u !== false)
-                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-            }
-        }
-        return message;
-    }
-    internalBinaryWrite(message: ListAgentsChannel, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* string channel_type = 1; */
-        if (message.channelType !== "")
-            writer.tag(1, WireType.LengthDelimited).string(message.channelType);
-        /* string channel_name = 2; */
-        if (message.channelName !== "")
-            writer.tag(2, WireType.LengthDelimited).string(message.channelName);
-        /* string main_identifier = 3; */
-        if (message.mainIdentifier !== "")
-            writer.tag(3, WireType.LengthDelimited).string(message.mainIdentifier);
-        /* optional string secondary_identifier = 4; */
-        if (message.secondaryIdentifier !== undefined)
-            writer.tag(4, WireType.LengthDelimited).string(message.secondaryIdentifier);
-        let u = options.writeUnknownFields;
-        if (u !== false)
-            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-        return writer;
-    }
-}
-/**
- * @generated MessageType for protobuf message list_agents.ListAgentsChannel
- */
-export const ListAgentsChannel = new ListAgentsChannel$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class ListAgentsHypurrLaunch$Type extends MessageType<ListAgentsHypurrLaunch> {
-    constructor() {
-        super("list_agents.ListAgentsHypurrLaunch", [
-            { no: 1, name: "token_ticker", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 2, name: "token_address", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "listed_timestamp", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
-        ]);
-    }
-    create(value?: PartialMessage<ListAgentsHypurrLaunch>): ListAgentsHypurrLaunch {
-        const message = globalThis.Object.create((this.messagePrototype!));
-        message.tokenTicker = "";
-        message.tokenAddress = "";
-        message.listedTimestamp = "";
-        if (value !== undefined)
-            reflectionMergePartial<ListAgentsHypurrLaunch>(this, message, value);
-        return message;
-    }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: ListAgentsHypurrLaunch): ListAgentsHypurrLaunch {
-        let message = target ?? this.create(), end = reader.pos + length;
-        while (reader.pos < end) {
-            let [fieldNo, wireType] = reader.tag();
-            switch (fieldNo) {
-                case /* string token_ticker */ 1:
-                    message.tokenTicker = reader.string();
-                    break;
-                case /* string token_address */ 2:
-                    message.tokenAddress = reader.string();
-                    break;
-                case /* string listed_timestamp */ 3:
-                    message.listedTimestamp = reader.string();
-                    break;
-                default:
-                    let u = options.readUnknownField;
-                    if (u === "throw")
-                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-                    let d = reader.skip(wireType);
-                    if (u !== false)
-                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-            }
-        }
-        return message;
-    }
-    internalBinaryWrite(message: ListAgentsHypurrLaunch, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* string token_ticker = 1; */
-        if (message.tokenTicker !== "")
-            writer.tag(1, WireType.LengthDelimited).string(message.tokenTicker);
-        /* string token_address = 2; */
+        /* string token_address = 6; */
         if (message.tokenAddress !== "")
-            writer.tag(2, WireType.LengthDelimited).string(message.tokenAddress);
-        /* string listed_timestamp = 3; */
-        if (message.listedTimestamp !== "")
-            writer.tag(3, WireType.LengthDelimited).string(message.listedTimestamp);
+            writer.tag(6, WireType.LengthDelimited).string(message.tokenAddress);
+        /* string token_ticker = 7; */
+        if (message.tokenTicker !== "")
+            writer.tag(7, WireType.LengthDelimited).string(message.tokenTicker);
+        /* bool enabled = 8; */
+        if (message.enabled !== false)
+            writer.tag(8, WireType.Varint).bool(message.enabled);
+        /* list_agents.CreationStatus creation_status = 9; */
+        if (message.creationStatus !== 0)
+            writer.tag(9, WireType.Varint).int32(message.creationStatus);
+        /* google.protobuf.Timestamp created_at = 10; */
+        if (message.createdAt)
+            Timestamp.internalBinaryWrite(message.createdAt, writer.tag(10, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.Timestamp updated_at = 11; */
+        if (message.updatedAt)
+            Timestamp.internalBinaryWrite(message.updatedAt, writer.tag(11, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
@@ -428,6 +406,6 @@ class ListAgentsHypurrLaunch$Type extends MessageType<ListAgentsHypurrLaunch> {
     }
 }
 /**
- * @generated MessageType for protobuf message list_agents.ListAgentsHypurrLaunch
+ * @generated MessageType for protobuf message list_agents.ListedAgentGeneralConfig
  */
-export const ListAgentsHypurrLaunch = new ListAgentsHypurrLaunch$Type();
+export const ListedAgentGeneralConfig = new ListedAgentGeneralConfig$Type();

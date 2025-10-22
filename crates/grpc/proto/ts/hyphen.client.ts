@@ -15,10 +15,10 @@ import type { UnsubscribeContemplationRequest } from "./hyphen";
 import type { SubscribeContemplationResponse } from "./hyphen";
 import type { SubscribeContemplationRequest } from "./hyphen";
 import type { ServerStreamingCall } from "@protobuf-ts/runtime-rpc";
-import type { GetUserAgentsResponse } from "./user_agents";
-import type { GetUserAgentsRequest } from "./user_agents";
 import type { ModifyAgentResponse } from "./modify_agent";
 import type { ModifyAgentRequest } from "./modify_agent";
+import type { AddPaymentResponse } from "./hyphen";
+import type { AddPaymentRequest } from "./hyphen";
 import type { AddTokenAddressResponse } from "./hyphen";
 import type { AddTokenAddressRequest } from "./hyphen";
 import { stackIntercept } from "@protobuf-ts/runtime-rpc";
@@ -39,13 +39,13 @@ export interface IHyphenClient {
      */
     addTokenAddress(input: AddTokenAddressRequest, options?: RpcOptions): UnaryCall<AddTokenAddressRequest, AddTokenAddressResponse>;
     /**
+     * @generated from protobuf rpc: AddPayment
+     */
+    addPayment(input: AddPaymentRequest, options?: RpcOptions): UnaryCall<AddPaymentRequest, AddPaymentResponse>;
+    /**
      * @generated from protobuf rpc: ModifyAgent
      */
     modifyAgent(input: ModifyAgentRequest, options?: RpcOptions): UnaryCall<ModifyAgentRequest, ModifyAgentResponse>;
-    /**
-     * @generated from protobuf rpc: GetUserAgents
-     */
-    getUserAgents(input: GetUserAgentsRequest, options?: RpcOptions): UnaryCall<GetUserAgentsRequest, GetUserAgentsResponse>;
     /**
      * @generated from protobuf rpc: SubscribeContemplation
      */
@@ -96,18 +96,18 @@ export class HyphenClient implements IHyphenClient, ServiceInfo {
         return stackIntercept<AddTokenAddressRequest, AddTokenAddressResponse>("unary", this._transport, method, opt, input);
     }
     /**
+     * @generated from protobuf rpc: AddPayment
+     */
+    addPayment(input: AddPaymentRequest, options?: RpcOptions): UnaryCall<AddPaymentRequest, AddPaymentResponse> {
+        const method = this.methods[2], opt = this._transport.mergeOptions(options);
+        return stackIntercept<AddPaymentRequest, AddPaymentResponse>("unary", this._transport, method, opt, input);
+    }
+    /**
      * @generated from protobuf rpc: ModifyAgent
      */
     modifyAgent(input: ModifyAgentRequest, options?: RpcOptions): UnaryCall<ModifyAgentRequest, ModifyAgentResponse> {
-        const method = this.methods[2], opt = this._transport.mergeOptions(options);
-        return stackIntercept<ModifyAgentRequest, ModifyAgentResponse>("unary", this._transport, method, opt, input);
-    }
-    /**
-     * @generated from protobuf rpc: GetUserAgents
-     */
-    getUserAgents(input: GetUserAgentsRequest, options?: RpcOptions): UnaryCall<GetUserAgentsRequest, GetUserAgentsResponse> {
         const method = this.methods[3], opt = this._transport.mergeOptions(options);
-        return stackIntercept<GetUserAgentsRequest, GetUserAgentsResponse>("unary", this._transport, method, opt, input);
+        return stackIntercept<ModifyAgentRequest, ModifyAgentResponse>("unary", this._transport, method, opt, input);
     }
     /**
      * @generated from protobuf rpc: SubscribeContemplation

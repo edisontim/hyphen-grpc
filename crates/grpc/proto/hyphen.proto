@@ -5,14 +5,13 @@ package hyphen;
 import "modify_agent.proto";
 import "types.proto";
 import "create_agent.proto";
-import "user_agents.proto";
 import "list_agents.proto";
 
 service Hyphen {
 	rpc CreateAgent(create_agent.CreateAgentRequest) returns (create_agent.CreateAgentResponse);
 	rpc AddTokenAddress(AddTokenAddressRequest) returns (AddTokenAddressResponse);
+	rpc AddPayment(AddPaymentRequest) returns (AddPaymentResponse);
 	rpc ModifyAgent(modify_agent.ModifyAgentRequest) returns (modify_agent.ModifyAgentResponse);
-	rpc GetUserAgents(user_agents.GetUserAgentsRequest) returns (user_agents.GetUserAgentsResponse);
     rpc SubscribeContemplation(SubscribeContemplationRequest) returns (stream SubscribeContemplationResponse);
     rpc UnsubscribeContemplation(UnsubscribeContemplationRequest) returns (UnsubscribeContemplationResponse);
     rpc GetChannels(GetChannelsRequest) returns (GetChannelsResponse);
@@ -30,6 +29,15 @@ message AddTokenAddressRequest {
 }
 
 message AddTokenAddressResponse {
+    bool success = 1;
+}
+
+message AddPaymentRequest {
+	int32 agent_id = 1;
+    create_agent.TransferSpotHpyh transfer_spot_hyph = 2;
+}
+
+message AddPaymentResponse {
     bool success = 1;
 }
 
