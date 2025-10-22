@@ -9,7 +9,6 @@ export * from "./list_agents";
 export * from "./mcp";
 export * from "./modify_agent";
 export * from "./types";
-export * from "./user_agents";
 export * from "./webauthn";
 export { WebAuthnServiceClient } from "./webauthn.client";
 export type { IWebAuthnServiceClient } from "./webauthn.client";

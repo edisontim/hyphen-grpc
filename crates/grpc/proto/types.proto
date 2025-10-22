@@ -7,9 +7,9 @@ import "google/protobuf/timestamp.proto";
 message AgentGeneralConfig {
     string name = 1;
     string creator = 2;
-    optional string elevenlabs_api_key = 5;
-    repeated string tools = 6;
-    optional string voice_id = 7;
+    optional string elevenlabs_api_key = 3;
+    repeated string tools = 4;
+    optional string voice_id = 5;
 }
 
 message AgentPersonality {

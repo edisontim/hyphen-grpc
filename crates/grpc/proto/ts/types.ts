@@ -24,15 +24,15 @@ export interface AgentGeneralConfig {
      */
     creator: string;
     /**
-     * @generated from protobuf field: optional string elevenlabs_api_key = 5
+     * @generated from protobuf field: optional string elevenlabs_api_key = 3
      */
     elevenlabsApiKey?: string;
     /**
-     * @generated from protobuf field: repeated string tools = 6
+     * @generated from protobuf field: repeated string tools = 4
      */
     tools: string[];
     /**
-     * @generated from protobuf field: optional string voice_id = 7
+     * @generated from protobuf field: optional string voice_id = 5
      */
     voiceId?: string;
 }
@@ -183,9 +183,9 @@ class AgentGeneralConfig$Type extends MessageType<AgentGeneralConfig> {
         super("types.AgentGeneralConfig", [
             { no: 1, name: "name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 2, name: "creator", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 5, name: "elevenlabs_api_key", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 6, name: "tools", kind: "scalar", repeat: 2 /*RepeatType.UNPACKED*/, T: 9 /*ScalarType.STRING*/ },
-            { no: 7, name: "voice_id", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
+            { no: 3, name: "elevenlabs_api_key", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 4, name: "tools", kind: "scalar", repeat: 2 /*RepeatType.UNPACKED*/, T: 9 /*ScalarType.STRING*/ },
+            { no: 5, name: "voice_id", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
         ]);
     }
     create(value?: PartialMessage<AgentGeneralConfig>): AgentGeneralConfig {
@@ -208,13 +208,13 @@ class AgentGeneralConfig$Type extends MessageType<AgentGeneralConfig> {
                 case /* string creator */ 2:
                     message.creator = reader.string();
                     break;
-                case /* optional string elevenlabs_api_key */ 5:
+                case /* optional string elevenlabs_api_key */ 3:
                     message.elevenlabsApiKey = reader.string();
                     break;
-                case /* repeated string tools */ 6:
+                case /* repeated string tools */ 4:
                     message.tools.push(reader.string());
                     break;
-                case /* optional string voice_id */ 7:
+                case /* optional string voice_id */ 5:
                     message.voiceId = reader.string();
                     break;
                 default:
@@ -235,15 +235,15 @@ class AgentGeneralConfig$Type extends MessageType<AgentGeneralConfig> {
         /* string creator = 2; */
         if (message.creator !== "")
             writer.tag(2, WireType.LengthDelimited).string(message.creator);
-        /* optional string elevenlabs_api_key = 5; */
+        /* optional string elevenlabs_api_key = 3; */
         if (message.elevenlabsApiKey !== undefined)
-            writer.tag(5, WireType.LengthDelimited).string(message.elevenlabsApiKey);
-        /* repeated string tools = 6; */
+            writer.tag(3, WireType.LengthDelimited).string(message.elevenlabsApiKey);
+        /* repeated string tools = 4; */
         for (let i = 0; i < message.tools.length; i++)
-            writer.tag(6, WireType.LengthDelimited).string(message.tools[i]);
-        /* optional string voice_id = 7; */
+            writer.tag(4, WireType.LengthDelimited).string(message.tools[i]);
+        /* optional string voice_id = 5; */
         if (message.voiceId !== undefined)
-            writer.tag(7, WireType.LengthDelimited).string(message.voiceId);
+            writer.tag(5, WireType.LengthDelimited).string(message.voiceId);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
