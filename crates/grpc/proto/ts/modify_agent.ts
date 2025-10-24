@@ -23,10 +23,6 @@ export interface ModifyAgentRequest {
      * @generated from protobuf field: types.AgentPersonality personality = 2
      */
     personality?: AgentPersonality;
-    /**
-     * @generated from protobuf field: string signature = 3
-     */
-    signature: string;
 }
 /**
  * @generated from protobuf message modify_agent.ModifyAgentResponse
@@ -63,13 +59,11 @@ class ModifyAgentRequest$Type extends MessageType<ModifyAgentRequest> {
     constructor() {
         super("modify_agent.ModifyAgentRequest", [
             { no: 1, name: "general_config", kind: "message", T: () => ModifyAgentGeneralConfig },
-            { no: 2, name: "personality", kind: "message", T: () => AgentPersonality },
-            { no: 3, name: "signature", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 2, name: "personality", kind: "message", T: () => AgentPersonality }
         ]);
     }
     create(value?: PartialMessage<ModifyAgentRequest>): ModifyAgentRequest {
         const message = globalThis.Object.create((this.messagePrototype!));
-        message.signature = "";
         if (value !== undefined)
             reflectionMergePartial<ModifyAgentRequest>(this, message, value);
         return message;
@@ -84,9 +78,6 @@ class ModifyAgentRequest$Type extends MessageType<ModifyAgentRequest> {
                     break;
                 case /* types.AgentPersonality personality */ 2:
                     message.personality = AgentPersonality.internalBinaryRead(reader, reader.uint32(), options, message.personality);
-                    break;
-                case /* string signature */ 3:
-                    message.signature = reader.string();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -106,9 +97,6 @@ class ModifyAgentRequest$Type extends MessageType<ModifyAgentRequest> {
         /* types.AgentPersonality personality = 2; */
         if (message.personality)
             AgentPersonality.internalBinaryWrite(message.personality, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
-        /* string signature = 3; */
-        if (message.signature !== "")
-            writer.tag(3, WireType.LengthDelimited).string(message.signature);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

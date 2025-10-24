@@ -7,7 +7,6 @@ import "types.proto";
 message ModifyAgentRequest {
 	ModifyAgentGeneralConfig general_config = 1;
 	types.AgentPersonality personality = 2;
-	string signature = 3;
 }
 
 message ModifyAgentResponse {
