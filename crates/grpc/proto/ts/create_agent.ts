@@ -57,9 +57,9 @@ export interface CreateAgentResponse {
  */
 export interface TransferSpotHpyh {
     /**
-     * @generated from protobuf field: float amount = 1
+     * @generated from protobuf field: string amount = 1
      */
-    amount: number;
+    amount: string;
     /**
      * @generated from protobuf field: uint64 time = 2
      */
@@ -208,7 +208,7 @@ export const CreateAgentResponse = new CreateAgentResponse$Type();
 class TransferSpotHpyh$Type extends MessageType<TransferSpotHpyh> {
     constructor() {
         super("create_agent.TransferSpotHpyh", [
-            { no: 1, name: "amount", kind: "scalar", T: 2 /*ScalarType.FLOAT*/ },
+            { no: 1, name: "amount", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 2, name: "time", kind: "scalar", T: 4 /*ScalarType.UINT64*/, L: 0 /*LongType.BIGINT*/ },
             { no: 3, name: "signature", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 4, name: "wallet_address", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
@@ -216,7 +216,7 @@ class TransferSpotHpyh$Type extends MessageType<TransferSpotHpyh> {
     }
     create(value?: PartialMessage<TransferSpotHpyh>): TransferSpotHpyh {
         const message = globalThis.Object.create((this.messagePrototype!));
-        message.amount = 0;
+        message.amount = "";
         message.time = 0n;
         message.signature = "";
         message.walletAddress = "";
@@ -229,8 +229,8 @@ class TransferSpotHpyh$Type extends MessageType<TransferSpotHpyh> {
         while (reader.pos < end) {
             let [fieldNo, wireType] = reader.tag();
             switch (fieldNo) {
-                case /* float amount */ 1:
-                    message.amount = reader.float();
+                case /* string amount */ 1:
+                    message.amount = reader.string();
                     break;
                 case /* uint64 time */ 2:
                     message.time = reader.uint64().toBigInt();
@@ -253,9 +253,9 @@ class TransferSpotHpyh$Type extends MessageType<TransferSpotHpyh> {
         return message;
     }
     internalBinaryWrite(message: TransferSpotHpyh, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* float amount = 1; */
-        if (message.amount !== 0)
-            writer.tag(1, WireType.Bit32).float(message.amount);
+        /* string amount = 1; */
+        if (message.amount !== "")
+            writer.tag(1, WireType.LengthDelimited).string(message.amount);
         /* uint64 time = 2; */
         if (message.time !== 0n)
             writer.tag(2, WireType.Varint).uint64(message.time);

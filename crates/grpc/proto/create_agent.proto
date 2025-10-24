@@ -18,7 +18,7 @@ message CreateAgentResponse {
 }
 
 message TransferSpotHpyh {
-	float amount = 1;
+	string amount = 1;
 	uint64 time = 2;
 	string signature = 3;
 	string wallet_address = 4;
