@@ -10,6 +10,7 @@ import { UnknownFieldHandler } from "@protobuf-ts/runtime";
 import type { PartialMessage } from "@protobuf-ts/runtime";
 import { reflectionMergePartial } from "@protobuf-ts/runtime";
 import { MessageType } from "@protobuf-ts/runtime";
+import { AgentClient } from "./types";
 import { AgentPersonality } from "./types";
 /**
  * @generated from protobuf message modify_agent.ModifyAgentRequest
@@ -23,6 +24,10 @@ export interface ModifyAgentRequest {
      * @generated from protobuf field: types.AgentPersonality personality = 2
      */
     personality?: AgentPersonality;
+    /**
+     * @generated from protobuf field: repeated types.AgentClient clients = 3
+     */
+    clients: AgentClient[];
 }
 /**
  * @generated from protobuf message modify_agent.ModifyAgentResponse
@@ -59,11 +64,13 @@ class ModifyAgentRequest$Type extends MessageType<ModifyAgentRequest> {
     constructor() {
         super("modify_agent.ModifyAgentRequest", [
             { no: 1, name: "general_config", kind: "message", T: () => ModifyAgentGeneralConfig },
-            { no: 2, name: "personality", kind: "message", T: () => AgentPersonality }
+            { no: 2, name: "personality", kind: "message", T: () => AgentPersonality },
+            { no: 3, name: "clients", kind: "message", repeat: 2 /*RepeatType.UNPACKED*/, T: () => AgentClient }
         ]);
     }
     create(value?: PartialMessage<ModifyAgentRequest>): ModifyAgentRequest {
         const message = globalThis.Object.create((this.messagePrototype!));
+        message.clients = [];
         if (value !== undefined)
             reflectionMergePartial<ModifyAgentRequest>(this, message, value);
         return message;
@@ -78,6 +85,9 @@ class ModifyAgentRequest$Type extends MessageType<ModifyAgentRequest> {
                     break;
                 case /* types.AgentPersonality personality */ 2:
                     message.personality = AgentPersonality.internalBinaryRead(reader, reader.uint32(), options, message.personality);
+                    break;
+                case /* repeated types.AgentClient clients */ 3:
+                    message.clients.push(AgentClient.internalBinaryRead(reader, reader.uint32(), options));
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -97,6 +107,9 @@ class ModifyAgentRequest$Type extends MessageType<ModifyAgentRequest> {
         /* types.AgentPersonality personality = 2; */
         if (message.personality)
             AgentPersonality.internalBinaryWrite(message.personality, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
+        /* repeated types.AgentClient clients = 3; */
+        for (let i = 0; i < message.clients.length; i++)
+            AgentClient.internalBinaryWrite(message.clients[i], writer.tag(3, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
