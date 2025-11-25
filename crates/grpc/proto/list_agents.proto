@@ -17,7 +17,7 @@ message ListAgentsResponse {
 message ListedAgent {
     ListedAgentGeneralConfig general_config = 1;
     optional types.AgentPersonality personality = 2;
-	repeated types.AgentChannel channels = 10;
+	repeated types.AgentChannel channels = 3;
 }
 
 message ListedAgentGeneralConfig {

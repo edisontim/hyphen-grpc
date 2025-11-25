@@ -48,7 +48,7 @@ export interface ListedAgent {
      */
     personality?: AgentPersonality;
     /**
-     * @generated from protobuf field: repeated types.AgentChannel channels = 10
+     * @generated from protobuf field: repeated types.AgentChannel channels = 3
      */
     channels: AgentChannel[];
 }
@@ -230,7 +230,7 @@ class ListedAgent$Type extends MessageType<ListedAgent> {
         super("list_agents.ListedAgent", [
             { no: 1, name: "general_config", kind: "message", T: () => ListedAgentGeneralConfig },
             { no: 2, name: "personality", kind: "message", T: () => AgentPersonality },
-            { no: 10, name: "channels", kind: "message", repeat: 2 /*RepeatType.UNPACKED*/, T: () => AgentChannel }
+            { no: 3, name: "channels", kind: "message", repeat: 2 /*RepeatType.UNPACKED*/, T: () => AgentChannel }
         ]);
     }
     create(value?: PartialMessage<ListedAgent>): ListedAgent {
@@ -251,7 +251,7 @@ class ListedAgent$Type extends MessageType<ListedAgent> {
                 case /* optional types.AgentPersonality personality */ 2:
                     message.personality = AgentPersonality.internalBinaryRead(reader, reader.uint32(), options, message.personality);
                     break;
-                case /* repeated types.AgentChannel channels */ 10:
+                case /* repeated types.AgentChannel channels */ 3:
                     message.channels.push(AgentChannel.internalBinaryRead(reader, reader.uint32(), options));
                     break;
                 default:
@@ -272,9 +272,9 @@ class ListedAgent$Type extends MessageType<ListedAgent> {
         /* optional types.AgentPersonality personality = 2; */
         if (message.personality)
             AgentPersonality.internalBinaryWrite(message.personality, writer.tag(2, WireType.LengthDelimited).fork(), options).join();
-        /* repeated types.AgentChannel channels = 10; */
+        /* repeated types.AgentChannel channels = 3; */
         for (let i = 0; i < message.channels.length; i++)
-            AgentChannel.internalBinaryWrite(message.channels[i], writer.tag(10, WireType.LengthDelimited).fork(), options).join();
+            AgentChannel.internalBinaryWrite(message.channels[i], writer.tag(3, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

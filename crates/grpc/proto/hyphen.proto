@@ -17,6 +17,7 @@ service Hyphen {
     rpc GetChannels(GetChannelsRequest) returns (GetChannelsResponse);
     rpc GetRecentContemplations(GetRecentContemplationsRequest) returns (GetRecentContemplationsResponse);
 	rpc ListAgents(list_agents.ListAgentsRequest) returns (list_agents.ListAgentsResponse);
+	rpc GetAgentByName(GetAgentByNameRequest) returns (list_agents.ListedAgent);
 	// rpc ExecuteFunction(mcp.ExecuteFunctionRequest) returns (mcp.ExecuteFunctionResponse);
 	// rpc GetOpenAIEphemeralToken(mcp.GetOpenAiEphemeralTokenRequest) returns (mcp.GetOpenAiEphemeralTokenResponse);
 	// rpc GetServerAccesses(mcp.GetServerAccessesRequest) returns (mcp.GetServerAccessesResponse);
@@ -77,3 +78,6 @@ message SubscribeContemplationResponse {
     optional string subscription_id = 2;
 }
 
+message GetAgentByNameRequest {
+	string name = 1;
+}

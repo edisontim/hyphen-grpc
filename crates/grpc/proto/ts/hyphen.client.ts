@@ -4,6 +4,8 @@
 import type { RpcTransport } from "@protobuf-ts/runtime-rpc";
 import type { ServiceInfo } from "@protobuf-ts/runtime-rpc";
 import { Hyphen } from "./hyphen";
+import type { ListedAgent } from "./list_agents";
+import type { GetAgentByNameRequest } from "./hyphen";
 import type { ListAgentsResponse } from "./list_agents";
 import type { ListAgentsRequest } from "./list_agents";
 import type { GetRecentContemplationsResponse } from "./hyphen";
@@ -63,14 +65,18 @@ export interface IHyphenClient {
      */
     getRecentContemplations(input: GetRecentContemplationsRequest, options?: RpcOptions): UnaryCall<GetRecentContemplationsRequest, GetRecentContemplationsResponse>;
     /**
+     * @generated from protobuf rpc: ListAgents
+     */
+    listAgents(input: ListAgentsRequest, options?: RpcOptions): UnaryCall<ListAgentsRequest, ListAgentsResponse>;
+    /**
      * rpc ExecuteFunction(mcp.ExecuteFunctionRequest) returns (mcp.ExecuteFunctionResponse);
      * rpc GetOpenAIEphemeralToken(mcp.GetOpenAiEphemeralTokenRequest) returns (mcp.GetOpenAiEphemeralTokenResponse);
      * rpc GetServerAccesses(mcp.GetServerAccessesRequest) returns (mcp.GetServerAccessesResponse);
      * rpc AddServerAccess(mcp.AddServerAccessRequest) returns (mcp.AddServerAccessResponse);
      *
-     * @generated from protobuf rpc: ListAgents
+     * @generated from protobuf rpc: GetAgentByName
      */
-    listAgents(input: ListAgentsRequest, options?: RpcOptions): UnaryCall<ListAgentsRequest, ListAgentsResponse>;
+    getAgentByName(input: GetAgentByNameRequest, options?: RpcOptions): UnaryCall<GetAgentByNameRequest, ListedAgent>;
 }
 /**
  * @generated from protobuf service hyphen.Hyphen
@@ -138,15 +144,22 @@ export class HyphenClient implements IHyphenClient, ServiceInfo {
         return stackIntercept<GetRecentContemplationsRequest, GetRecentContemplationsResponse>("unary", this._transport, method, opt, input);
     }
     /**
-     * rpc ExecuteFunction(mcp.ExecuteFunctionRequest) returns (mcp.ExecuteFunctionResponse);
-     * rpc GetOpenAIEphemeralToken(mcp.GetOpenAiEphemeralTokenRequest) returns (mcp.GetOpenAiEphemeralTokenResponse);
-     * rpc GetServerAccesses(mcp.GetServerAccessesRequest) returns (mcp.GetServerAccessesResponse);
-     * rpc AddServerAccess(mcp.AddServerAccessRequest) returns (mcp.AddServerAccessResponse);
-     *
      * @generated from protobuf rpc: ListAgents
      */
     listAgents(input: ListAgentsRequest, options?: RpcOptions): UnaryCall<ListAgentsRequest, ListAgentsResponse> {
         const method = this.methods[8], opt = this._transport.mergeOptions(options);
         return stackIntercept<ListAgentsRequest, ListAgentsResponse>("unary", this._transport, method, opt, input);
+    }
+    /**
+     * rpc ExecuteFunction(mcp.ExecuteFunctionRequest) returns (mcp.ExecuteFunctionResponse);
+     * rpc GetOpenAIEphemeralToken(mcp.GetOpenAiEphemeralTokenRequest) returns (mcp.GetOpenAiEphemeralTokenResponse);
+     * rpc GetServerAccesses(mcp.GetServerAccessesRequest) returns (mcp.GetServerAccessesResponse);
+     * rpc AddServerAccess(mcp.AddServerAccessRequest) returns (mcp.AddServerAccessResponse);
+     *
+     * @generated from protobuf rpc: GetAgentByName
+     */
+    getAgentByName(input: GetAgentByNameRequest, options?: RpcOptions): UnaryCall<GetAgentByNameRequest, ListedAgent> {
+        const method = this.methods[9], opt = this._transport.mergeOptions(options);
+        return stackIntercept<GetAgentByNameRequest, ListedAgent>("unary", this._transport, method, opt, input);
     }
 }
