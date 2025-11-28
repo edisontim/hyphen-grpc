@@ -19,4 +19,6 @@ message ModifyAgentGeneralConfig {
 	repeated string tools = 2;
     optional string elevenlabs_api_key = 3;
 	optional string voice_id = 4;
+	string llm_model = 5;
+	optional string llm_api_key = 6;
 }

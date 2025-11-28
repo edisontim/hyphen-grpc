@@ -10,6 +10,8 @@ message AgentGeneralConfig {
     optional string elevenlabs_api_key = 3;
     repeated string tools = 4;
     optional string voice_id = 5;
+	string llm_model = 6;
+	optional string llm_api_key = 7;
 }
 
 message AgentPersonality {

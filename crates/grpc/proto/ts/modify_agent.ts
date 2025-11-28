@@ -58,6 +58,14 @@ export interface ModifyAgentGeneralConfig {
      * @generated from protobuf field: optional string voice_id = 4
      */
     voiceId?: string;
+    /**
+     * @generated from protobuf field: string llm_model = 5
+     */
+    llmModel: string;
+    /**
+     * @generated from protobuf field: optional string llm_api_key = 6
+     */
+    llmApiKey?: string;
 }
 // @generated message type with reflection information, may provide speed optimized methods
 class ModifyAgentRequest$Type extends MessageType<ModifyAgentRequest> {
@@ -174,13 +182,16 @@ class ModifyAgentGeneralConfig$Type extends MessageType<ModifyAgentGeneralConfig
             { no: 1, name: "id", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
             { no: 2, name: "tools", kind: "scalar", repeat: 2 /*RepeatType.UNPACKED*/, T: 9 /*ScalarType.STRING*/ },
             { no: 3, name: "elevenlabs_api_key", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 4, name: "voice_id", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
+            { no: 4, name: "voice_id", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
+            { no: 5, name: "llm_model", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 6, name: "llm_api_key", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
         ]);
     }
     create(value?: PartialMessage<ModifyAgentGeneralConfig>): ModifyAgentGeneralConfig {
         const message = globalThis.Object.create((this.messagePrototype!));
         message.id = 0;
         message.tools = [];
+        message.llmModel = "";
         if (value !== undefined)
             reflectionMergePartial<ModifyAgentGeneralConfig>(this, message, value);
         return message;
@@ -201,6 +212,12 @@ class ModifyAgentGeneralConfig$Type extends MessageType<ModifyAgentGeneralConfig
                     break;
                 case /* optional string voice_id */ 4:
                     message.voiceId = reader.string();
+                    break;
+                case /* string llm_model */ 5:
+                    message.llmModel = reader.string();
+                    break;
+                case /* optional string llm_api_key */ 6:
+                    message.llmApiKey = reader.string();
                     break;
                 default:
                     let u = options.readUnknownField;
@@ -226,6 +243,12 @@ class ModifyAgentGeneralConfig$Type extends MessageType<ModifyAgentGeneralConfig
         /* optional string voice_id = 4; */
         if (message.voiceId !== undefined)
             writer.tag(4, WireType.LengthDelimited).string(message.voiceId);
+        /* string llm_model = 5; */
+        if (message.llmModel !== "")
+            writer.tag(5, WireType.LengthDelimited).string(message.llmModel);
+        /* optional string llm_api_key = 6; */
+        if (message.llmApiKey !== undefined)
+            writer.tag(6, WireType.LengthDelimited).string(message.llmApiKey);
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
