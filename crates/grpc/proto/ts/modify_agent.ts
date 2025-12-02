@@ -59,9 +59,9 @@ export interface ModifyAgentGeneralConfig {
      */
     voiceId?: string;
     /**
-     * @generated from protobuf field: string llm_model = 5
+     * @generated from protobuf field: optional string llm_model = 5
      */
-    llmModel: string;
+    llmModel?: string;
     /**
      * @generated from protobuf field: optional string llm_api_key = 6
      */
@@ -183,7 +183,7 @@ class ModifyAgentGeneralConfig$Type extends MessageType<ModifyAgentGeneralConfig
             { no: 2, name: "tools", kind: "scalar", repeat: 2 /*RepeatType.UNPACKED*/, T: 9 /*ScalarType.STRING*/ },
             { no: 3, name: "elevenlabs_api_key", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
             { no: 4, name: "voice_id", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
-            { no: 5, name: "llm_model", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 5, name: "llm_model", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ },
             { no: 6, name: "llm_api_key", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
         ]);
     }
@@ -191,7 +191,6 @@ class ModifyAgentGeneralConfig$Type extends MessageType<ModifyAgentGeneralConfig
         const message = globalThis.Object.create((this.messagePrototype!));
         message.id = 0;
         message.tools = [];
-        message.llmModel = "";
         if (value !== undefined)
             reflectionMergePartial<ModifyAgentGeneralConfig>(this, message, value);
         return message;
@@ -213,7 +212,7 @@ class ModifyAgentGeneralConfig$Type extends MessageType<ModifyAgentGeneralConfig
                 case /* optional string voice_id */ 4:
                     message.voiceId = reader.string();
                     break;
-                case /* string llm_model */ 5:
+                case /* optional string llm_model */ 5:
                     message.llmModel = reader.string();
                     break;
                 case /* optional string llm_api_key */ 6:
@@ -243,8 +242,8 @@ class ModifyAgentGeneralConfig$Type extends MessageType<ModifyAgentGeneralConfig
         /* optional string voice_id = 4; */
         if (message.voiceId !== undefined)
             writer.tag(4, WireType.LengthDelimited).string(message.voiceId);
-        /* string llm_model = 5; */
-        if (message.llmModel !== "")
+        /* optional string llm_model = 5; */
+        if (message.llmModel !== undefined)
             writer.tag(5, WireType.LengthDelimited).string(message.llmModel);
         /* optional string llm_api_key = 6; */
         if (message.llmApiKey !== undefined)

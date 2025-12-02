@@ -89,15 +89,19 @@ export interface ListedAgentGeneralConfig {
      */
     enabled: boolean;
     /**
-     * @generated from protobuf field: list_agents.CreationStatus creation_status = 9
+     * @generated from protobuf field: string llm_model = 9
+     */
+    llmModel: string;
+    /**
+     * @generated from protobuf field: list_agents.CreationStatus creation_status = 10
      */
     creationStatus: CreationStatus;
     /**
-     * @generated from protobuf field: google.protobuf.Timestamp created_at = 10
+     * @generated from protobuf field: google.protobuf.Timestamp created_at = 11
      */
     createdAt?: Timestamp;
     /**
-     * @generated from protobuf field: google.protobuf.Timestamp updated_at = 11
+     * @generated from protobuf field: google.protobuf.Timestamp updated_at = 12
      */
     updatedAt?: Timestamp;
 }
@@ -297,9 +301,10 @@ class ListedAgentGeneralConfig$Type extends MessageType<ListedAgentGeneralConfig
             { no: 6, name: "token_address", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 7, name: "token_ticker", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
             { no: 8, name: "enabled", kind: "scalar", T: 8 /*ScalarType.BOOL*/ },
-            { no: 9, name: "creation_status", kind: "enum", T: () => ["list_agents.CreationStatus", CreationStatus] },
-            { no: 10, name: "created_at", kind: "message", T: () => Timestamp },
-            { no: 11, name: "updated_at", kind: "message", T: () => Timestamp }
+            { no: 9, name: "llm_model", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 10, name: "creation_status", kind: "enum", T: () => ["list_agents.CreationStatus", CreationStatus] },
+            { no: 11, name: "created_at", kind: "message", T: () => Timestamp },
+            { no: 12, name: "updated_at", kind: "message", T: () => Timestamp }
         ]);
     }
     create(value?: PartialMessage<ListedAgentGeneralConfig>): ListedAgentGeneralConfig {
@@ -311,6 +316,7 @@ class ListedAgentGeneralConfig$Type extends MessageType<ListedAgentGeneralConfig
         message.tokenAddress = "";
         message.tokenTicker = "";
         message.enabled = false;
+        message.llmModel = "";
         message.creationStatus = 0;
         if (value !== undefined)
             reflectionMergePartial<ListedAgentGeneralConfig>(this, message, value);
@@ -345,13 +351,16 @@ class ListedAgentGeneralConfig$Type extends MessageType<ListedAgentGeneralConfig
                 case /* bool enabled */ 8:
                     message.enabled = reader.bool();
                     break;
-                case /* list_agents.CreationStatus creation_status */ 9:
+                case /* string llm_model */ 9:
+                    message.llmModel = reader.string();
+                    break;
+                case /* list_agents.CreationStatus creation_status */ 10:
                     message.creationStatus = reader.int32();
                     break;
-                case /* google.protobuf.Timestamp created_at */ 10:
+                case /* google.protobuf.Timestamp created_at */ 11:
                     message.createdAt = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.createdAt);
                     break;
-                case /* google.protobuf.Timestamp updated_at */ 11:
+                case /* google.protobuf.Timestamp updated_at */ 12:
                     message.updatedAt = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.updatedAt);
                     break;
                 default:
@@ -390,15 +399,18 @@ class ListedAgentGeneralConfig$Type extends MessageType<ListedAgentGeneralConfig
         /* bool enabled = 8; */
         if (message.enabled !== false)
             writer.tag(8, WireType.Varint).bool(message.enabled);
-        /* list_agents.CreationStatus creation_status = 9; */
+        /* string llm_model = 9; */
+        if (message.llmModel !== "")
+            writer.tag(9, WireType.LengthDelimited).string(message.llmModel);
+        /* list_agents.CreationStatus creation_status = 10; */
         if (message.creationStatus !== 0)
-            writer.tag(9, WireType.Varint).int32(message.creationStatus);
-        /* google.protobuf.Timestamp created_at = 10; */
+            writer.tag(10, WireType.Varint).int32(message.creationStatus);
+        /* google.protobuf.Timestamp created_at = 11; */
         if (message.createdAt)
-            Timestamp.internalBinaryWrite(message.createdAt, writer.tag(10, WireType.LengthDelimited).fork(), options).join();
-        /* google.protobuf.Timestamp updated_at = 11; */
+            Timestamp.internalBinaryWrite(message.createdAt, writer.tag(11, WireType.LengthDelimited).fork(), options).join();
+        /* google.protobuf.Timestamp updated_at = 12; */
         if (message.updatedAt)
-            Timestamp.internalBinaryWrite(message.updatedAt, writer.tag(11, WireType.LengthDelimited).fork(), options).join();
+            Timestamp.internalBinaryWrite(message.updatedAt, writer.tag(12, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

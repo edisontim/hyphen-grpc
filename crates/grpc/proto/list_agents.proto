@@ -29,9 +29,10 @@ message ListedAgentGeneralConfig {
     string token_address = 6;
 	string token_ticker = 7;
     bool enabled = 8;
-    CreationStatus creation_status = 9;
-    google.protobuf.Timestamp created_at = 10;
-    google.protobuf.Timestamp updated_at = 11;
+	string llm_model = 9;
+    CreationStatus creation_status = 10;
+    google.protobuf.Timestamp created_at = 11;
+    google.protobuf.Timestamp updated_at = 12;
 }
 
 enum CreationStatus {
