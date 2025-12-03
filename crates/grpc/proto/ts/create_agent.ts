@@ -10,6 +10,7 @@ import { UnknownFieldHandler } from "@protobuf-ts/runtime";
 import type { PartialMessage } from "@protobuf-ts/runtime";
 import { reflectionMergePartial } from "@protobuf-ts/runtime";
 import { MessageType } from "@protobuf-ts/runtime";
+import { ExistingKnowledge } from "./types";
 import { AgentChannel } from "./types";
 import { AgentClient } from "./types";
 import { AgentPersonality } from "./types";
@@ -42,6 +43,10 @@ export interface CreateAgentRequest {
      * @generated from protobuf field: string token_ticker = 6
      */
     tokenTicker: string;
+    /**
+     * @generated from protobuf field: optional types.ExistingKnowledge existing_knowledge = 7
+     */
+    existingKnowledge?: ExistingKnowledge;
 }
 /**
  * @generated from protobuf message create_agent.CreateAgentResponse
@@ -82,7 +87,8 @@ class CreateAgentRequest$Type extends MessageType<CreateAgentRequest> {
             { no: 3, name: "clients", kind: "message", repeat: 2 /*RepeatType.UNPACKED*/, T: () => AgentClient },
             { no: 4, name: "channels", kind: "message", repeat: 2 /*RepeatType.UNPACKED*/, T: () => AgentChannel },
             { no: 5, name: "transfer_spot_hyph", kind: "message", T: () => TransferSpotHpyh },
-            { no: 6, name: "token_ticker", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+            { no: 6, name: "token_ticker", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
+            { no: 7, name: "existing_knowledge", kind: "message", T: () => ExistingKnowledge }
         ]);
     }
     create(value?: PartialMessage<CreateAgentRequest>): CreateAgentRequest {
@@ -117,6 +123,9 @@ class CreateAgentRequest$Type extends MessageType<CreateAgentRequest> {
                 case /* string token_ticker */ 6:
                     message.tokenTicker = reader.string();
                     break;
+                case /* optional types.ExistingKnowledge existing_knowledge */ 7:
+                    message.existingKnowledge = ExistingKnowledge.internalBinaryRead(reader, reader.uint32(), options, message.existingKnowledge);
+                    break;
                 default:
                     let u = options.readUnknownField;
                     if (u === "throw")
@@ -147,6 +156,9 @@ class CreateAgentRequest$Type extends MessageType<CreateAgentRequest> {
         /* string token_ticker = 6; */
         if (message.tokenTicker !== "")
             writer.tag(6, WireType.LengthDelimited).string(message.tokenTicker);
+        /* optional types.ExistingKnowledge existing_knowledge = 7; */
+        if (message.existingKnowledge)
+            ExistingKnowledge.internalBinaryWrite(message.existingKnowledge, writer.tag(7, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

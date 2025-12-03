@@ -10,6 +10,7 @@ import { UnknownFieldHandler } from "@protobuf-ts/runtime";
 import type { PartialMessage } from "@protobuf-ts/runtime";
 import { reflectionMergePartial } from "@protobuf-ts/runtime";
 import { MessageType } from "@protobuf-ts/runtime";
+import { ExistingKnowledge } from "./types";
 import { AgentClient } from "./types";
 import { AgentPersonality } from "./types";
 /**
@@ -28,6 +29,10 @@ export interface ModifyAgentRequest {
      * @generated from protobuf field: repeated types.AgentClient clients = 3
      */
     clients: AgentClient[];
+    /**
+     * @generated from protobuf field: optional types.ExistingKnowledge existing_knowledge = 4
+     */
+    existingKnowledge?: ExistingKnowledge;
 }
 /**
  * @generated from protobuf message modify_agent.ModifyAgentResponse
@@ -73,7 +78,8 @@ class ModifyAgentRequest$Type extends MessageType<ModifyAgentRequest> {
         super("modify_agent.ModifyAgentRequest", [
             { no: 1, name: "general_config", kind: "message", T: () => ModifyAgentGeneralConfig },
             { no: 2, name: "personality", kind: "message", T: () => AgentPersonality },
-            { no: 3, name: "clients", kind: "message", repeat: 2 /*RepeatType.UNPACKED*/, T: () => AgentClient }
+            { no: 3, name: "clients", kind: "message", repeat: 2 /*RepeatType.UNPACKED*/, T: () => AgentClient },
+            { no: 4, name: "existing_knowledge", kind: "message", T: () => ExistingKnowledge }
         ]);
     }
     create(value?: PartialMessage<ModifyAgentRequest>): ModifyAgentRequest {
@@ -97,6 +103,9 @@ class ModifyAgentRequest$Type extends MessageType<ModifyAgentRequest> {
                 case /* repeated types.AgentClient clients */ 3:
                     message.clients.push(AgentClient.internalBinaryRead(reader, reader.uint32(), options));
                     break;
+                case /* optional types.ExistingKnowledge existing_knowledge */ 4:
+                    message.existingKnowledge = ExistingKnowledge.internalBinaryRead(reader, reader.uint32(), options, message.existingKnowledge);
+                    break;
                 default:
                     let u = options.readUnknownField;
                     if (u === "throw")
@@ -118,6 +127,9 @@ class ModifyAgentRequest$Type extends MessageType<ModifyAgentRequest> {
         /* repeated types.AgentClient clients = 3; */
         for (let i = 0; i < message.clients.length; i++)
             AgentClient.internalBinaryWrite(message.clients[i], writer.tag(3, WireType.LengthDelimited).fork(), options).join();
+        /* optional types.ExistingKnowledge existing_knowledge = 4; */
+        if (message.existingKnowledge)
+            ExistingKnowledge.internalBinaryWrite(message.existingKnowledge, writer.tag(4, WireType.LengthDelimited).fork(), options).join();
         let u = options.writeUnknownFields;
         if (u !== false)
             (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);

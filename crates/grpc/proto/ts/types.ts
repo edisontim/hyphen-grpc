@@ -165,6 +165,19 @@ export interface ContemplationMessage {
     inResponseTo?: string;
 }
 /**
+ * @generated from protobuf message types.ExistingKnowledge
+ */
+export interface ExistingKnowledge {
+    /**
+     * @generated from protobuf field: bytes file_data = 1
+     */
+    fileData: Uint8Array;
+    /**
+     * @generated from protobuf field: string filename = 2
+     */
+    filename: string;
+}
+/**
  * @generated from protobuf enum types.Type
  */
 export enum Type {
@@ -627,3 +640,58 @@ class ContemplationMessage$Type extends MessageType<ContemplationMessage> {
  * @generated MessageType for protobuf message types.ContemplationMessage
  */
 export const ContemplationMessage = new ContemplationMessage$Type();
+// @generated message type with reflection information, may provide speed optimized methods
+class ExistingKnowledge$Type extends MessageType<ExistingKnowledge> {
+    constructor() {
+        super("types.ExistingKnowledge", [
+            { no: 1, name: "file_data", kind: "scalar", T: 12 /*ScalarType.BYTES*/ },
+            { no: 2, name: "filename", kind: "scalar", T: 9 /*ScalarType.STRING*/ }
+        ]);
+    }
+    create(value?: PartialMessage<ExistingKnowledge>): ExistingKnowledge {
+        const message = globalThis.Object.create((this.messagePrototype!));
+        message.fileData = new Uint8Array(0);
+        message.filename = "";
+        if (value !== undefined)
+            reflectionMergePartial<ExistingKnowledge>(this, message, value);
+        return message;
+    }
+    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: ExistingKnowledge): ExistingKnowledge {
+        let message = target ?? this.create(), end = reader.pos + length;
+        while (reader.pos < end) {
+            let [fieldNo, wireType] = reader.tag();
+            switch (fieldNo) {
+                case /* bytes file_data */ 1:
+                    message.fileData = reader.bytes();
+                    break;
+                case /* string filename */ 2:
+                    message.filename = reader.string();
+                    break;
+                default:
+                    let u = options.readUnknownField;
+                    if (u === "throw")
+                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
+                    let d = reader.skip(wireType);
+                    if (u !== false)
+                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
+            }
+        }
+        return message;
+    }
+    internalBinaryWrite(message: ExistingKnowledge, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
+        /* bytes file_data = 1; */
+        if (message.fileData.length)
+            writer.tag(1, WireType.LengthDelimited).bytes(message.fileData);
+        /* string filename = 2; */
+        if (message.filename !== "")
+            writer.tag(2, WireType.LengthDelimited).string(message.filename);
+        let u = options.writeUnknownFields;
+        if (u !== false)
+            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
+        return writer;
+    }
+}
+/**
+ * @generated MessageType for protobuf message types.ExistingKnowledge
+ */
+export const ExistingKnowledge = new ExistingKnowledge$Type();

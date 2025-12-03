@@ -5,20 +5,21 @@ package modify_agent;
 import "types.proto";
 
 message ModifyAgentRequest {
-	ModifyAgentGeneralConfig general_config = 1;
-	types.AgentPersonality personality = 2;
-	repeated types.AgentClient clients = 3;
+    ModifyAgentGeneralConfig general_config = 1;
+    types.AgentPersonality personality = 2;
+    repeated types.AgentClient clients = 3;
+	optional types.ExistingKnowledge existing_knowledge = 4;
 }
 
 message ModifyAgentResponse {
-	int32 agent_id = 1;
+    int32 agent_id = 1;
 }
 
 message ModifyAgentGeneralConfig {
-	int32 id = 1;
-	repeated string tools = 2;
+    int32 id = 1;
+    repeated string tools = 2;
     optional string elevenlabs_api_key = 3;
-	optional string voice_id = 4;
-	optional string llm_model = 5;
-	optional string llm_api_key = 6;
+    optional string voice_id = 4;
+    optional string llm_model = 5;
+    optional string llm_api_key = 6;
 }

@@ -58,3 +58,8 @@ enum Type {
     CONTEMPLATION = 2;
     AGENT_MESSAGE = 3;
 }
+
+message ExistingKnowledge {
+    bytes file_data = 1;
+    string filename = 2;
+}
