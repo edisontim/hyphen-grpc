@@ -8,15 +8,8 @@ import type { ListedAgent } from "./list_agents";
 import type { GetAgentByNameRequest } from "./hyphen";
 import type { ListAgentsResponse } from "./list_agents";
 import type { ListAgentsRequest } from "./list_agents";
-import type { GetRecentContemplationsResponse } from "./hyphen";
-import type { GetRecentContemplationsRequest } from "./hyphen";
 import type { GetChannelsResponse } from "./hyphen";
 import type { GetChannelsRequest } from "./hyphen";
-import type { UnsubscribeContemplationResponse } from "./hyphen";
-import type { UnsubscribeContemplationRequest } from "./hyphen";
-import type { SubscribeContemplationResponse } from "./hyphen";
-import type { SubscribeContemplationRequest } from "./hyphen";
-import type { ServerStreamingCall } from "@protobuf-ts/runtime-rpc";
 import type { ModifyAgentResponse } from "./modify_agent";
 import type { ModifyAgentRequest } from "./modify_agent";
 import type { AddPaymentResponse } from "./hyphen";
@@ -49,31 +42,14 @@ export interface IHyphenClient {
      */
     modifyAgent(input: ModifyAgentRequest, options?: RpcOptions): UnaryCall<ModifyAgentRequest, ModifyAgentResponse>;
     /**
-     * @generated from protobuf rpc: SubscribeContemplation
-     */
-    subscribeContemplation(input: SubscribeContemplationRequest, options?: RpcOptions): ServerStreamingCall<SubscribeContemplationRequest, SubscribeContemplationResponse>;
-    /**
-     * @generated from protobuf rpc: UnsubscribeContemplation
-     */
-    unsubscribeContemplation(input: UnsubscribeContemplationRequest, options?: RpcOptions): UnaryCall<UnsubscribeContemplationRequest, UnsubscribeContemplationResponse>;
-    /**
      * @generated from protobuf rpc: GetChannels
      */
     getChannels(input: GetChannelsRequest, options?: RpcOptions): UnaryCall<GetChannelsRequest, GetChannelsResponse>;
-    /**
-     * @generated from protobuf rpc: GetRecentContemplations
-     */
-    getRecentContemplations(input: GetRecentContemplationsRequest, options?: RpcOptions): UnaryCall<GetRecentContemplationsRequest, GetRecentContemplationsResponse>;
     /**
      * @generated from protobuf rpc: ListAgents
      */
     listAgents(input: ListAgentsRequest, options?: RpcOptions): UnaryCall<ListAgentsRequest, ListAgentsResponse>;
     /**
-     * rpc ExecuteFunction(mcp.ExecuteFunctionRequest) returns (mcp.ExecuteFunctionResponse);
-     * rpc GetOpenAIEphemeralToken(mcp.GetOpenAiEphemeralTokenRequest) returns (mcp.GetOpenAiEphemeralTokenResponse);
-     * rpc GetServerAccesses(mcp.GetServerAccessesRequest) returns (mcp.GetServerAccessesResponse);
-     * rpc AddServerAccess(mcp.AddServerAccessRequest) returns (mcp.AddServerAccessResponse);
-     *
      * @generated from protobuf rpc: GetAgentByName
      */
     getAgentByName(input: GetAgentByNameRequest, options?: RpcOptions): UnaryCall<GetAgentByNameRequest, ListedAgent>;
@@ -116,50 +92,24 @@ export class HyphenClient implements IHyphenClient, ServiceInfo {
         return stackIntercept<ModifyAgentRequest, ModifyAgentResponse>("unary", this._transport, method, opt, input);
     }
     /**
-     * @generated from protobuf rpc: SubscribeContemplation
-     */
-    subscribeContemplation(input: SubscribeContemplationRequest, options?: RpcOptions): ServerStreamingCall<SubscribeContemplationRequest, SubscribeContemplationResponse> {
-        const method = this.methods[4], opt = this._transport.mergeOptions(options);
-        return stackIntercept<SubscribeContemplationRequest, SubscribeContemplationResponse>("serverStreaming", this._transport, method, opt, input);
-    }
-    /**
-     * @generated from protobuf rpc: UnsubscribeContemplation
-     */
-    unsubscribeContemplation(input: UnsubscribeContemplationRequest, options?: RpcOptions): UnaryCall<UnsubscribeContemplationRequest, UnsubscribeContemplationResponse> {
-        const method = this.methods[5], opt = this._transport.mergeOptions(options);
-        return stackIntercept<UnsubscribeContemplationRequest, UnsubscribeContemplationResponse>("unary", this._transport, method, opt, input);
-    }
-    /**
      * @generated from protobuf rpc: GetChannels
      */
     getChannels(input: GetChannelsRequest, options?: RpcOptions): UnaryCall<GetChannelsRequest, GetChannelsResponse> {
-        const method = this.methods[6], opt = this._transport.mergeOptions(options);
+        const method = this.methods[4], opt = this._transport.mergeOptions(options);
         return stackIntercept<GetChannelsRequest, GetChannelsResponse>("unary", this._transport, method, opt, input);
-    }
-    /**
-     * @generated from protobuf rpc: GetRecentContemplations
-     */
-    getRecentContemplations(input: GetRecentContemplationsRequest, options?: RpcOptions): UnaryCall<GetRecentContemplationsRequest, GetRecentContemplationsResponse> {
-        const method = this.methods[7], opt = this._transport.mergeOptions(options);
-        return stackIntercept<GetRecentContemplationsRequest, GetRecentContemplationsResponse>("unary", this._transport, method, opt, input);
     }
     /**
      * @generated from protobuf rpc: ListAgents
      */
     listAgents(input: ListAgentsRequest, options?: RpcOptions): UnaryCall<ListAgentsRequest, ListAgentsResponse> {
-        const method = this.methods[8], opt = this._transport.mergeOptions(options);
+        const method = this.methods[5], opt = this._transport.mergeOptions(options);
         return stackIntercept<ListAgentsRequest, ListAgentsResponse>("unary", this._transport, method, opt, input);
     }
     /**
-     * rpc ExecuteFunction(mcp.ExecuteFunctionRequest) returns (mcp.ExecuteFunctionResponse);
-     * rpc GetOpenAIEphemeralToken(mcp.GetOpenAiEphemeralTokenRequest) returns (mcp.GetOpenAiEphemeralTokenResponse);
-     * rpc GetServerAccesses(mcp.GetServerAccessesRequest) returns (mcp.GetServerAccessesResponse);
-     * rpc AddServerAccess(mcp.AddServerAccessRequest) returns (mcp.AddServerAccessResponse);
-     *
      * @generated from protobuf rpc: GetAgentByName
      */
     getAgentByName(input: GetAgentByNameRequest, options?: RpcOptions): UnaryCall<GetAgentByNameRequest, ListedAgent> {
-        const method = this.methods[9], opt = this._transport.mergeOptions(options);
+        const method = this.methods[6], opt = this._transport.mergeOptions(options);
         return stackIntercept<GetAgentByNameRequest, ListedAgent>("unary", this._transport, method, opt, input);
     }
 }

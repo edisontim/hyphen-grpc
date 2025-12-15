@@ -41,17 +41,6 @@ message AgentChannel {
     bool gated = 5;
 }
 
-
-message ContemplationMessage {
-    int32 agent_id = 1;
-    string contemplation = 2;
-    google.protobuf.Timestamp created_at = 3;
-    string channel_name = 4;
-    Type type = 5;
-    string username = 6;
-    optional string in_response_to = 7;
-}
-
 enum Type {
     START = 0;
     USER_MESSAGE = 1;

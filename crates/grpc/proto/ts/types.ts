@@ -10,7 +10,6 @@ import { UnknownFieldHandler } from "@protobuf-ts/runtime";
 import type { PartialMessage } from "@protobuf-ts/runtime";
 import { reflectionMergePartial } from "@protobuf-ts/runtime";
 import { MessageType } from "@protobuf-ts/runtime";
-import { Timestamp } from "./google/protobuf/timestamp";
 /**
  * @generated from protobuf message types.AgentGeneralConfig
  */
@@ -130,39 +129,6 @@ export interface AgentChannel {
      * @generated from protobuf field: bool gated = 5
      */
     gated: boolean;
-}
-/**
- * @generated from protobuf message types.ContemplationMessage
- */
-export interface ContemplationMessage {
-    /**
-     * @generated from protobuf field: int32 agent_id = 1
-     */
-    agentId: number;
-    /**
-     * @generated from protobuf field: string contemplation = 2
-     */
-    contemplation: string;
-    /**
-     * @generated from protobuf field: google.protobuf.Timestamp created_at = 3
-     */
-    createdAt?: Timestamp;
-    /**
-     * @generated from protobuf field: string channel_name = 4
-     */
-    channelName: string;
-    /**
-     * @generated from protobuf field: types.Type type = 5
-     */
-    type: Type;
-    /**
-     * @generated from protobuf field: string username = 6
-     */
-    username: string;
-    /**
-     * @generated from protobuf field: optional string in_response_to = 7
-     */
-    inResponseTo?: string;
 }
 /**
  * @generated from protobuf message types.ExistingKnowledge
@@ -547,99 +513,6 @@ class AgentChannel$Type extends MessageType<AgentChannel> {
  * @generated MessageType for protobuf message types.AgentChannel
  */
 export const AgentChannel = new AgentChannel$Type();
-// @generated message type with reflection information, may provide speed optimized methods
-class ContemplationMessage$Type extends MessageType<ContemplationMessage> {
-    constructor() {
-        super("types.ContemplationMessage", [
-            { no: 1, name: "agent_id", kind: "scalar", T: 5 /*ScalarType.INT32*/ },
-            { no: 2, name: "contemplation", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 3, name: "created_at", kind: "message", T: () => Timestamp },
-            { no: 4, name: "channel_name", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 5, name: "type", kind: "enum", T: () => ["types.Type", Type] },
-            { no: 6, name: "username", kind: "scalar", T: 9 /*ScalarType.STRING*/ },
-            { no: 7, name: "in_response_to", kind: "scalar", opt: true, T: 9 /*ScalarType.STRING*/ }
-        ]);
-    }
-    create(value?: PartialMessage<ContemplationMessage>): ContemplationMessage {
-        const message = globalThis.Object.create((this.messagePrototype!));
-        message.agentId = 0;
-        message.contemplation = "";
-        message.channelName = "";
-        message.type = 0;
-        message.username = "";
-        if (value !== undefined)
-            reflectionMergePartial<ContemplationMessage>(this, message, value);
-        return message;
-    }
-    internalBinaryRead(reader: IBinaryReader, length: number, options: BinaryReadOptions, target?: ContemplationMessage): ContemplationMessage {
-        let message = target ?? this.create(), end = reader.pos + length;
-        while (reader.pos < end) {
-            let [fieldNo, wireType] = reader.tag();
-            switch (fieldNo) {
-                case /* int32 agent_id */ 1:
-                    message.agentId = reader.int32();
-                    break;
-                case /* string contemplation */ 2:
-                    message.contemplation = reader.string();
-                    break;
-                case /* google.protobuf.Timestamp created_at */ 3:
-                    message.createdAt = Timestamp.internalBinaryRead(reader, reader.uint32(), options, message.createdAt);
-                    break;
-                case /* string channel_name */ 4:
-                    message.channelName = reader.string();
-                    break;
-                case /* types.Type type */ 5:
-                    message.type = reader.int32();
-                    break;
-                case /* string username */ 6:
-                    message.username = reader.string();
-                    break;
-                case /* optional string in_response_to */ 7:
-                    message.inResponseTo = reader.string();
-                    break;
-                default:
-                    let u = options.readUnknownField;
-                    if (u === "throw")
-                        throw new globalThis.Error(`Unknown field ${fieldNo} (wire type ${wireType}) for ${this.typeName}`);
-                    let d = reader.skip(wireType);
-                    if (u !== false)
-                        (u === true ? UnknownFieldHandler.onRead : u)(this.typeName, message, fieldNo, wireType, d);
-            }
-        }
-        return message;
-    }
-    internalBinaryWrite(message: ContemplationMessage, writer: IBinaryWriter, options: BinaryWriteOptions): IBinaryWriter {
-        /* int32 agent_id = 1; */
-        if (message.agentId !== 0)
-            writer.tag(1, WireType.Varint).int32(message.agentId);
-        /* string contemplation = 2; */
-        if (message.contemplation !== "")
-            writer.tag(2, WireType.LengthDelimited).string(message.contemplation);
-        /* google.protobuf.Timestamp created_at = 3; */
-        if (message.createdAt)
-            Timestamp.internalBinaryWrite(message.createdAt, writer.tag(3, WireType.LengthDelimited).fork(), options).join();
-        /* string channel_name = 4; */
-        if (message.channelName !== "")
-            writer.tag(4, WireType.LengthDelimited).string(message.channelName);
-        /* types.Type type = 5; */
-        if (message.type !== 0)
-            writer.tag(5, WireType.Varint).int32(message.type);
-        /* string username = 6; */
-        if (message.username !== "")
-            writer.tag(6, WireType.LengthDelimited).string(message.username);
-        /* optional string in_response_to = 7; */
-        if (message.inResponseTo !== undefined)
-            writer.tag(7, WireType.LengthDelimited).string(message.inResponseTo);
-        let u = options.writeUnknownFields;
-        if (u !== false)
-            (u == true ? UnknownFieldHandler.onWrite : u)(this.typeName, message, writer);
-        return writer;
-    }
-}
-/**
- * @generated MessageType for protobuf message types.ContemplationMessage
- */
-export const ContemplationMessage = new ContemplationMessage$Type();
 // @generated message type with reflection information, may provide speed optimized methods
 class ExistingKnowledge$Type extends MessageType<ExistingKnowledge> {
     constructor() {
